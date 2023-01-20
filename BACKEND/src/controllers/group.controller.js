@@ -135,13 +135,13 @@ module.exports = {
                 to: guestUser.email,
                 subject,
                 html: `
-                          <a>Accept her invitation</a>
+                          <a href="google.fr">Accept her invitation</a>
                       `,
               };
               const emailData = await sendEmail(mailOptions);
               return res
                   .status(200)
-                  .json({ success: true, message: `Invitation to join your team '${group.name}' is sent ${emailData}` });
+                  .json({ success: true, message: `Invitation to join your team '${group.name}' is sent` });
             } else {
               return res
                   .status(404)

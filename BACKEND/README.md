@@ -1,3 +1,4 @@
+[] : todo , [.] : in progress , [x] : done
 BACKEND
 [
     MongoDB,
@@ -7,4 +8,8 @@ BACKEND
 =>AUTH<=
 [x] register
 [x] login
-[x] verify account by email (SignUP)
+=>TASK<=
+[x] CRUD (create - read - update - delete)
+=>GROUP<=
+[x] CRUD (create - read - update - delete)
+[.] send invitation
