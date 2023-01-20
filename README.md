@@ -1,7 +1,7 @@
-- MEAN Stack -
+- MERN Stack -
   [
   - MongoDB
   - Express
-  - Angular
+  - React
   - NodeJs
   ]
