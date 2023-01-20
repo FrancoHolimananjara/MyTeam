@@ -6,21 +6,19 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 function connexion() {
     mongoose
-    .connect(process.env.MONGODB_URI,{ useNewUrlParser: true, useUnifiedTopology: true})
-    .then(()=>{
-        console.log("Connected - successfully - to " + mongoose.connection.host);
-    }).catch(error => {
-        if (error.code == "ETIMEOUT") {
-            mongoose
-            .connect(process.env.MONGODB_URI_LOCAL,{ useNewUrlParser: true, useUnifiedTopology: true})
-            .then(()=>{
-                console.log("Connected - successfully - to " + mongoose.connection.host);
-            })
-            .catch((error)=>{
-                console.log(error);
-            })
-        }
-    })
+        .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+            if (err) {
+                mongoose
+                    .connect(process.env.MONGODB_URI_LOCAL, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                        console.log("Connected - successfully - to " + mongoose.connection.host);
+                    });
+            } else {
+                console.log("Connected - successfully - to cluster " + mongoose.connection.host);
+            }
+        })
 }
 
 module.exports = connexion;
