@@ -54,15 +54,15 @@ img{
   --sat: 0%;
   --title-color: hsl(var(--hue), var(--sat), 20%);
   --title-color-dark: hsl(var(--hue), var(--sat), 0%);
-  --text-color: hsl(var(--hue), var(--sat), 10%);
+  --text-color: hsl(var(--hue), var(--sat), 30%);
   --body-color: hsl(var(--hue), var(--sat), 98%);
   --container-color: #fff;
 
   /* Font */
-  --body-font: 'Operator Mono';
+  --body-font: 'JetBrains Mono';
 
   /* Typography */
-  --big-font-size: 3.5rem;
+  --big-font-size: 3rem;
   --normal-font-size: 1rem;
   --small-font-size: 0.875rem;
   --smaller-font-size: 0.813rem;
@@ -75,6 +75,7 @@ img{
   --font-normal: 400;
   --font-medium: 500;
   --font-semi-bold: 600;
+  --font-bold: 800;
 
   /* Z-index */
   --z-tooltip: 10;
@@ -86,7 +87,7 @@ img{
 @media screen and (max-width: 992px) {
   :root{
     /* Typography */
-      --big-font-size: 2.75rem;
+      --big-font-size: 2.5rem;
       --normal-font-size: 0.938rem;
       --small-font-size: 0.813rem;
       --smaller-font-size: 0.75rem;
@@ -146,7 +147,7 @@ img{
   margin-left: 0.5rem;
 }
 
-.button__flex{
+.button--flex{
   display: inline-flex;
   align-items: center;
 }
@@ -158,19 +159,55 @@ img{
     margin-left: 1.5rem;
     margin-right: 1.5rem;
   }
+
+  .button{
+    padding: 1rem 1.75rem;
+  }
+
+  .button__icon{
+    font-size: .5rem;
+  }
 }
 
 /* For medium devices */
 @media screen and (max-width: 768px) {
+  .section{
+    padding: 2rem 0 4rem;
+  }
+    .button {
+      padding: 0.9rem 1.70rem;
+    }
 }
 
 @media screen and (max-width: 5762px) {
 }
 
+@media screen and (max-width: 460px){
+  :root {
+      --big-font-size: 2.15rem;
+      --normal-font-size: 0.9rem;
+      --h3-font-size: 0.9rem;
+    }
+}
+
 /* For small devices */
 @media screen and (max-width: 350px) {
+  :root{
+    --big-font-size: 2rem;
+    --normal-font-size: 0.875rem;
+    --h3-font-size: 0.0.876rem;
+  }
+
+  .section{
+    justify-self: center;
+  }
+
   .container {
       margin-left: 1rem;
       margin-right: 1rem;
+  }
+
+    .button {
+      padding: 0.8rem 1.50rem;
     }
 }

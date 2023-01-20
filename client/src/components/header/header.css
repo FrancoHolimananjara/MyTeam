@@ -50,6 +50,7 @@
 
 .nav__logo{
     text-transform: uppercase;
+    font-weight: var(--font-bold);
 }
 .nav__toggle{
     margin-top: .4rem;

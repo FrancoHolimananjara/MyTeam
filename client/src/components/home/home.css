@@ -1,0 +1,208 @@
+.home__container{
+    row-gap: 3rem;
+}
+
+.home__content{
+    grid-template-columns: 550px repeat(1, 1fr);
+    padding-top: 5.5rem;
+    column-gap: 2rem;
+    align-items: center;
+}
+
+/* SOCIAL */
+
+/* SOCIAL */
+
+.home__title{
+    font-size: var(--big-font-size);
+    margin-bottom: 0.25rem;
+}
+
+.myteam{
+    font-weight: var(--font-bold);
+    color: rgb(172, 123, 77);
+}
+
+.home__subtitle{
+    position: relative;
+    font-size: var(--h3-font-size);
+    padding-left: 5.4rem;
+    font-weight: var(--font-normal);
+    margin-bottom: 1rem;
+}
+
+.home__subtitle::before{
+    content: '';
+    position: absolute;
+    width: 70px;
+    height: 1px;
+    background-color: var(--text-color);
+    left: 0;
+    top: 1rem;
+}
+
+.home__description{
+    max-width: 400px;
+    margin-bottom: 3rem;
+}
+
+.home__img{
+    background: url(../../assets/annie-spratt-QckxruozjRg-unsplash.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    box-shadow: inset 0 0 0 9px rgb(255 255 255 / 30%);
+    order: 1;
+    justify-self: center;
+    width: 400px;
+    height: 400px;
+    animation: profile__animate 15s ease-in-out infinite 1s;
+}
+
+@keyframes profile__animate {
+    0%{
+        border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+    }
+    50%{
+        border-radius: 30% 60% 70% 40%/50% 60% 30% 60%;
+    }
+    100%{
+        border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
+    }
+}
+
+.button__icon{
+    transform: rotate(-45deg);
+    margin-left: .5rem;
+    font-size: 1.2rem;
+    transition: .3s;
+}
+
+/* ScrollDown stuff */
+@keyframes scroll {
+    0% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(3.75rem);
+    }
+}
+
+svg #wheel {
+    animation: scroll ease 2s infinite;
+}
+
+.home__scroll-name{
+    color: var(--title-color);
+    font-weight: var(--font-medium);
+    margin-right: 0.25rem;
+    margin-left: 5px;
+}
+
+.home__scroll-chevrons{
+    font-size: 1.25rem;
+    color: var(--title-color);
+}
+
+/* BREAKPOINTS */
+/* For large devices */
+@media screen and (max-width: 992px) {
+    .home__content{
+        grid-template-columns: 474px repeat(1, 1fr);
+        column-gap: 1.25rem;
+    }
+
+    .home__subtitle{
+        padding-left: 3.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .home__subtitle::before{
+        width: 42px;
+        top: 0.8rem;
+    }
+
+    .home__description{
+        max-width: initial;
+        margin-bottom: 2.5rem;
+    }
+
+    .home__img{
+        width: 350px;
+        height: 350px;
+        box-shadow: inset 0 0 0 8px rgb(255 255 255 / 30%);
+    }
+
+}
+
+/* @media screen and (max-width: 885px){
+    .home__content {
+            grid-template-columns: 474px repeat(1, 1fr);
+            column-gap: 1.25rem;
+        }
+} */
+
+/* For medium devices */
+@media screen and (max-width: 768px) {
+    .section {
+        padding: 0;
+    }
+    .home__content{
+        grid-template-columns: 1fr;
+        padding-top: 3.5rem;
+        text-align: center;
+    }
+
+        .home__subtitle {
+            margin-right: 5rem;
+        }
+
+    .home__subtitle::before {
+        content: none;
+    }
+
+    .home__img{
+        order: initial;
+        justify-self: initial;
+        /* display: none; */
+    }
+
+    .home__data{
+        grid-column: 1/3;
+    }
+
+    .home__img{
+        justify-self: center;
+        width: 300px;
+        height: 300px;
+        box-shadow: inset 0 0 0 6px rgb(255 255 255 / 30%);
+    }
+
+    .home__scroll{
+        display: none;
+    }
+}
+
+/* For small devices */
+@media screen and (max-width: 460px) {
+    .home__content{
+        justify-self: center;
+    }
+    .home__img{
+        justify-self: center;
+        width: 250px;
+        height: 250px;
+        box-shadow: inset 0 0 0 4px rgb(255 255 255 / 30%);
+    }
+
+    .home__subtitle{
+        margin-right: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 398px){
+    .home__subtitle {
+        margin-right: 3rem;
+    }
+}

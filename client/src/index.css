@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system,'Operator Mono', BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system,'Poppins', BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -8,5 +8,5 @@ body {
 }
 
 code {
-  font-family: 'Operator Mono';
+  font-family: 'Poppins';
 }
