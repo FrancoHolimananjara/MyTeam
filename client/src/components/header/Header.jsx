@@ -12,13 +12,13 @@ function Header() {
     return (
         <header className='header'>
             <nav className="nav container">
-                <a href="index.html" className="nav__logo">
+                <a href="/" className="nav__logo">
                     My team
                 </a>
                 <div className={toggle? "nav__menu show-menu" : "nav__menu"}>
                     <ul className="nav__list grid">
                         <li className="nav__item">
-                            <a href="#home" className="nav__link active-link">
+                            <a href="/" className="nav__link active-link">
                                 <i className="bx bx-home nav__icon"></i> Home
                             </a>
                         </li>

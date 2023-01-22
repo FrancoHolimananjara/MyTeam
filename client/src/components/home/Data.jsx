@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Data() {
     return (
@@ -11,9 +12,9 @@ function Data() {
                 MyTeam is a platform designed for people who <b>Work</b> in a team, for project managment for example.
             </p>
 
-            <a href="#contact" className="button button--flex">
+            <Link className="button button--flex" to="/login">
                 Sart now <i className="bx bx-send button__icon"></i>
-            </a>
+            </Link>
         </div>
     );
 }
