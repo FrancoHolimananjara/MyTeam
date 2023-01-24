@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const userEmailVerificationSchema = new mongoose.Schema(
+const userVerificationEmailSchema = new mongoose.Schema(
   {
     userId: {
       type: String,
@@ -14,10 +14,10 @@ const userEmailVerificationSchema = new mongoose.Schema(
     }
   },
   {
-    collection: "userEmailVerifications",
+    collection: "userVerificationsEmails",
     timestamps: true,
   }
 );
 
-const User = mongoose.model("userEmailVerifications", userEmailVerificationSchema);
+const User = mongoose.model("userVerificationsEmails", userVerificationEmailSchema);
 module.exports = User;

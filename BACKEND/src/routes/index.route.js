@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.route("/auth/register").post(authController.register);
 router.route("/auth/login").post(authController.login);
-router.route("/auth/verify-email").get(authController.verify_email);
+router.route("/auth/verify/:_id/:uniqueString").get(authController.verify_email);
 
 router.route("/me/profile").get(authMiddleware, userController.profile);
 
