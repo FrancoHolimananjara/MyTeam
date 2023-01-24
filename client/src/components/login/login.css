@@ -1,0 +1,22 @@
+.login__container{
+    row-gap: 3rem;
+}
+
+.login__content{
+    grid-template-columns: 100% repeat(1, 1fr);
+    align-items: center;
+}
+
+.login__img{
+    background-color: aquamarine;
+    width: 100%;
+    height: 100%;
+}
+
+.login__social{
+    display: flex;
+    flex-direction: column;
+}
+.login__social a{
+    width: fit-content;
+}
