@@ -10,6 +10,7 @@ module.exports = {
 
     // Valid credentials
     const newUser = await createUser({ username, email, password });
+    await sendEmailVerification(newUser);
     res.json(newUser);
   },
   verify_email: async (req, res) => {
@@ -77,6 +78,15 @@ async function createUser(userData) {
       const createNewUser = await User.create(newUser);
       return createNewUser;
     }
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+async function sendEmailVerification({ _id, email }) {
+  try {
+    const uniqueString = crypto.randomUUID();
+    console.log(uniqueString);
   } catch (error) {
     throw new Error(error);
   }

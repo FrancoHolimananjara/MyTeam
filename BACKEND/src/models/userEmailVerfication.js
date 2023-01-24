@@ -9,7 +9,7 @@ const userEmailVerificationSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    expiresAd: {
+    expiresAt: {
       type: Date,
     }
   },
