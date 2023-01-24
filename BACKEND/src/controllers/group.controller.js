@@ -111,7 +111,9 @@ module.exports = {
       const _userId = ObjectId(req._userId);
       const _id = ObjectId(req.params._id);
       const _guestId = ObjectId(req.params._guestId);
-      var subject = "Invitation to join our team '";
+      var subject = "The invitation to join our team '";
+
+      const currentUrl = "http://localhost:3001/";
 
       const user = await findUser(_userId );
       console.log("User" +user);
@@ -125,8 +127,11 @@ module.exports = {
               if (user.email === guestUser.email) {
                 throw new Error("Same email, same user");
               }
+              // Concatenation du Subject
               subject += `${group.name}'`;
+              // Sender's emai
               var from;
+              // Condition if the group's creator send the invitation to other person
               if (group.creator != user._id) {
                 from = user.email;
               }
@@ -135,13 +140,14 @@ module.exports = {
                 to: guestUser.email,
                 subject,
                 html: `
-                          <a href="google.fr">Accept her invitation</a>
+                          <h2>${user.username} invite you to join his team</h2>
+                          <a href="${currentUrl + "api/group/" + _id + "/invite?guest=" + _guestId}">Accept his invitation</a>
                       `,
               };
               const emailData = await sendEmail(mailOptions);
               return res
                   .status(200)
-                  .json({ success: true, message: `Invitation to join your team '${group.name}' is sent` });
+                  .json({ success: true, message: `IThe invitation to join your team '${group.name}' is sent` });
             } else {
               return res
                   .status(404)
