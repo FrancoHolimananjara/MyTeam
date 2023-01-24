@@ -10,7 +10,7 @@ module.exports = {
 
     // Valid credentials
     const newUser = await createUser({ username, email, password });
-    await sendEmailVerification(newUser);
+    // await sendEmailVerification(newUser);
     res.json(newUser);
   },
   verify_email: async (req, res) => {
