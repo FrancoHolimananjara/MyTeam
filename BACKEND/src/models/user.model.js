@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "random-user.png",
     },
+    isVerified: {
+      type: Boolean,
+      default: false
+    },
     todos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }],
     adminInGroup: [{ type: mongoose.Schema.Types.ObjectId, ref: "Group" }],
   },
