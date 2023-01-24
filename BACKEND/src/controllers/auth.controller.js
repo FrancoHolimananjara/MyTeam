@@ -19,11 +19,34 @@ module.exports = {
     const emailData = await sendEmailVerification(newUser);
     res.status(201).json({success:true,message:"Verification email sent !",data:emailData});
   },
+
   verify_email: async (req, res) => {
     try {
       const user = await VeriyAccount(req.params);
       if (user) {
         res.sendFile(path.join(__dirname, "../../public/views/verified.html"));
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+
+  resendVerificationEmail: async (req, res) => {
+    try {
+      const { _id } = req.params;
+      const email = req.body;
+
+      if (!_id || !email) {
+        throw new Error("Empty user details are not allowed.");
+      } else {
+        // delete existing records and resend
+        await UserVerificationEmail.deleteMany({});
+        const emailData = await sendEmailVerification({ _id, email });
+        res.json({
+          success: true,
+          message: "Verification email resend successfully",
+          data: emailData,
+        });
       }
     } catch (error) {
       throw new Error(error);
