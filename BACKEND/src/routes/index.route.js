@@ -3,8 +3,6 @@ const authController = require("../controllers/auth.controller");
 const userController = require("../controllers/user.controller");
 const taskController = require("../controllers/task.controller");
 const groupController = require("../controllers/group.controller");
-const { accountVerified } = require("../middleware/accountVerified.middleware");
-const { validateUser } = require("../middleware/validator.middleware");
 const { authMiddleware } = require("../middleware/auth.middleware");
 const router = express.Router();
 
