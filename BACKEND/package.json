@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
-    "start:dev": "NODE_ENV=dev nodemon src/index.js",
-    "start:prod": "NODE_ENV=prod node src/index.js"
+    "start:dev": "nodemon src/index.js",
+    "start:prod": "node src/index.js"
   },
   "author": "ANDRIAMITANTSOA Holimananjara Franco (Kofra)",
   "license": "ISC",

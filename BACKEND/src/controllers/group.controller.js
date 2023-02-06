@@ -163,55 +163,6 @@ module.exports = {
     } catch (error) {
       throw new Error(error);
     }
-    
-    // await Group.findById(_id)
-    //   .then((groupFound) => {
-    //     if (groupFound) {
-    //       groupFound.members.forEach((member, i) => {
-    //         if (member == req._userId) {
-    //           subject += `${groupFound.name}'`;
-    //           info(_userId, _guestId).then((r) => {
-    //             //INVITATION BY EMAIL
-    //             User.findOneAndUpdate(
-    //               { _id: _guestId },
-    //               {
-    //                 $set: {
-    //                   emailToken: crypto.randomBytes(128).toString("hex"),
-    //                 },
-    //               },
-    //               {
-    //                 upsert: true,
-    //               }
-    //             ).then((docs) => {
-    //               if (docs) {
-    //                 const html = `
-    //                                         <a href="http://localhost:3001/api/group/${_id}/invite?guest=${_guestId}&token=${docs.emailToken}">Accept</a>
-    //                                     `;
-    //                 let sender = r.sender;
-    //                 let receiver = r.receiver;
-    //               } else {
-    //                 return res.status(404).json({
-    //                   success: false,
-    //                   message: "Email token incorrect !",
-    //                 });
-    //               }
-    //             });
-    //           });
-    //         } else {
-    //           return res
-    //             .status(404)
-    //             .json({ success: false, message: "You are not yet a member" });
-    //         }
-    //       });
-    //     } else {
-    //       return res
-    //         .status(404)
-    //         .json({ success: false, message: "Group not found" });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     return res.status(500).json({ success: false, message: err });
-    //   });
   },
   acceptInvitation: async (req, res) => {
     const _guestId = ObjectId(req.query.guest);
