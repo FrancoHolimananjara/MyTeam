@@ -4,6 +4,16 @@ import './login.css';
 function Login() {
 
     const [showPassword, setShowPassword] = useState(false);
+    const [identifier, setIdentifier] = useState("");
+    const [password, setPassword] = useState("");
+
+    const onSubmit = async () => {
+        const data = {
+            identifier,
+            password
+        }
+        console.log(data);
+    }
 
     return (
         <section className="login section">
@@ -12,17 +22,17 @@ function Login() {
                     <form action="" className="login__form">
                         <h1>Login form</h1>
                         <div className="input__group">
-                            <label htmlFor="username">Username</label>
-                            <input type="text" name="usename" id="username" />
+                            <label htmlFor="identifier">Identifier</label>
+                            <input type="text" name="usename" id="identifier" onChange={(e)=>{setIdentifier(e.target.value)}} />
                         </div>
                         <div className="input__group">
                             <div className="password">
                                 <label htmlFor="password">Password</label>
-                                <i className="bx bx-dizzy password__icon"></i>
+                                <i onClick={(e) => { setShowPassword(!showPassword);console.log(showPassword) }} className="bx bx-dizzy password__icon"></i>
                             </div>
-                            <input type="password" name="" id="password" />
+                            <input type={showPassword ? 'text' : 'password'} name="" id="password" onChange={(e) => { setPassword(e.target.value) }}/>
                         </div>
-                        <button className='button button__flex'>
+                        <button type='button' className='button button__flex' onClick={()=>onSubmit()}>
                             Sign In
                         </button>
                         <p className="or">Or</p>

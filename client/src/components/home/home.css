@@ -47,15 +47,15 @@
 }
 
 .home__img{
-    background: url(../../assets/annie-spratt-QckxruozjRg-unsplash.jpg);
+    background: url(../../assets/undraw_collaborators_re_hont.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     box-shadow: inset 0 0 0 9px rgb(255 255 255 / 30%);
     order: 1;
     justify-self: center;
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     animation: profile__animate 15s ease-in-out infinite 1s;
 }
 
