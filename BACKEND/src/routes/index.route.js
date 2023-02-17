@@ -32,4 +32,5 @@ router
   .route("/me/group/:_id/members/invite/:_guestId")
   .post(authMiddleware, groupController.sendInvitation);
 router.route("/group/:_id/invite").get(groupController.acceptInvitation);
+
 module.exports = router;

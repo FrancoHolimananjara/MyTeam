@@ -56,6 +56,7 @@ module.exports = {
   login: async (req, res) => {
     try {
       const { identifier, password } = req.body;
+      console.log(identifier,password);
       const user = await User.findOne({
         $or: [{ username: identifier }, { email: identifier }],
       });
