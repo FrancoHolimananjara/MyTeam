@@ -1,5 +1,6 @@
 import React , { useState } from 'react';
 import './login.css';
+import axios from 'axios';
 
 function Login() {
 
@@ -7,12 +8,16 @@ function Login() {
     const [identifier, setIdentifier] = useState("");
     const [password, setPassword] = useState("");
 
+    const [token, setToken] = useState("");
+
     const onSubmit = async () => {
         const data = {
             identifier,
             password
         }
-        console.log(data);
+        const response = await axios.post("http://localhost:3001/api/auth/login", data);
+        setToken(response.data['token']);
+        localStorage.setItem('auth', response.data['token']);
     }
 
     return (
@@ -38,10 +43,10 @@ function Login() {
                         <p className="or">Or</p>
                         <div className="login__social">
                             <a href="/" className="button">
-                                <i className="bx bxl-google"></i> <u>Google</u>account
+                                <i className="bx bxl-google"></i> Google account
                             </a>
                             <a href="/" className="button">
-                                <i className="bx bxl-github"></i> <u>GitHub</u> account
+                                <i className="bx bxl-github"></i> GitHub account
                             </a>
                         </div>
                     </form>

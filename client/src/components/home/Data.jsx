@@ -13,7 +13,7 @@ function Data() {
             </p>
 
             <Link className="button button--flex" to="/login">
-                Sart now <i className="bx bx-send button__icon"></i>
+                Start now <i className="bx bx-send button__icon"></i>
             </Link>
         </div>
     );
