@@ -5,10 +5,10 @@ const userInvitationEmailSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    userGuestId: {
+    userGuestId: [{
       type: String,
       required: true,
-    },
+    }],
     uniqueString: {
       type: String,
       required: true,

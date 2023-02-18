@@ -1,10 +1,11 @@
 const Group = require("../models/group.model");
 const User = require("../models/user.model");
-const { info } = require("./user.controller");
 const ObjectId = require("mongoose").Types.ObjectId;
 const crypto = require("crypto");
 const findUser = require('../utils/findUserById');
 const sendEmail = require("../utils/sendMail");
+const UserInvitationEmail = require("../models/userInvitationEmail.model");
+
 module.exports = {
   create: async (req, res) => {
     try {
@@ -194,3 +195,48 @@ module.exports = {
       });
   },
 };
+
+
+async function sendInvitationEmail({ _id, email }) {
+  try {
+    const uniqueString = crypto.randomUUID() + _id;
+    const currentUrl = "http://localhost:3001/";
+
+    const allIdGuest = await email.forEach(async (e) => {
+      var x = [];
+      const response = await User.findOne({ e });
+      x.push(response);
+      return x;
+    })
+
+    // mail options
+    const mailOptions = {
+      from: process.env.AUTH_EMAIL,
+      to: email,
+      subject: "Verify Your Email",
+      html: `<p>Verify your email address to complete registration and login to your account.</p>
+                <p>This link <b>expires in 30 minutes</b>.</p>
+                <p>Press <a href=${
+                  currentUrl + "api/auth/verify/" + _id + "/" + uniqueString
+                }>here</a> to proceed.</p>
+            `,
+    };
+    // Verify hash
+    const hashedUniqueString = await hashData(uniqueString);
+    const newInvitation = new UserInvitationEmail({
+      userId: _id,
+      userGuestId: allIdGuest,
+      uniqueString: hashedUniqueString,
+      expiresAt: Date.now() + 900000
+    });
+    // save the user Invitation record
+    await newInvitation.save();
+    await sendEmail(mailOptions);
+    return {
+      userId: _id,
+      email,
+    };
+  } catch (error) {
+    throw new Error(error);
+  }
+}
