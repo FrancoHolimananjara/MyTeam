@@ -3,6 +3,7 @@ import { createBrowserRouter, createRoutesFromElements, Outlet, Route, RouterPro
 import Header from './components/header/Header';
 import Home from './components/home/Home';
 import Login from './components/login/Login';
+import Register from './components/register/register';
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
       <Route path='/' element={<Root /> }>
         <Route index element={<Home /> } />
         <Route path='/login' element={<Login /> } />
+        <Route path='/register' element={<Register /> } />
       </Route>
     )
   )
