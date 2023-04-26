@@ -22,7 +22,7 @@ module.exports = {
 
   verify_email: async (req, res) => {
     try {
-      const user = await VeriyAccount(req.params);
+      const user = await VerifyAccount(req.params);
       if (user) {
         res.sendFile(path.join(__dirname, "../../public/views/verified.html"));
       }
@@ -136,7 +136,7 @@ async function sendEmailVerification({ _id, email }) {
   }
 }
 
-async function VeriyAccount({ _id, uniqueString }) {
+async function VerifyAccount({ _id, uniqueString }) {
   try {
     const userVerificationEmailExist = await UserVerificationEmail.findOne({
       $and: [{ userId: _id }]

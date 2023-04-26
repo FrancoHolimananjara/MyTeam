@@ -34,6 +34,12 @@ module.exports = {
       return res.status(500).json({ success: false, message: error });
     }
   },
+  /**
+   * RETRIEVE ALL GROUPS FOR EACH CREATOR
+   * @param {*} req 
+   * @param {*} res 
+   * @returns GROUPS
+   */
   findAll: async (req, res) => {
     try {
       const _userId = ObjectId(req._userId);
@@ -53,6 +59,12 @@ module.exports = {
       return res.status(500).json({ success: false, message: error });
     }
   },
+  /**
+   * RETREIVE GROUP ASSOCIATE WITH THE VALID ID
+   * @param {*} req 
+   * @param {*} res 
+   * @returns GROUP
+   */
   find: async (req, res) => {
     try {
       const _userId = ObjectId(req._userId);
@@ -74,9 +86,10 @@ module.exports = {
     }
   },
   /**
-   * MEMBRES
+   * RETRIEVE ALL MEMBRES IN GROUP
    * @param {*} req 
    * @param {*} res 
+   * @returns ALL MEMBERS
    */
   members: async (req, res) => {
     try {
