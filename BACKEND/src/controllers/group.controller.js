@@ -116,7 +116,7 @@ module.exports = {
     }
   },
   /**
-   * SEND INVITATION TO THE PERSON YOU WISH TO JOIN YOU TEAM
+   * SEND INVITATION TO THE PERSON YOU WISH TO JOIN YOUR TEAM
    * @param {*} req 
    * @param {*} res 
    */
