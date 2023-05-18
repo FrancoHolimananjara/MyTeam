@@ -143,6 +143,7 @@ async function VerifyAccount({ _id, uniqueString }) {
     });
     if (userVerificationEmailExist) {
       const match = await compareData(uniqueString, userVerificationEmailExist.uniqueString);
+      console.log(match);
       if (match) {
         const userVerified = await User.findByIdAndUpdate(
           { _id },
