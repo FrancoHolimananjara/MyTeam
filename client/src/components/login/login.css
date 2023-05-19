@@ -1,97 +1,13 @@
-.login__container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+.login-box {
+    width: calc(100% / 4);
+    height: fit-content;
+    margin: 50px auto;
+    border: solid black;
 }
 
-.login__content{
-    position: absolute;
-    top: 50%;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.input__group{
-    margin-top: .5rem;
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    row-gap: .2rem;
-}
-
-.login__form {
-}
-
-.blank__info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.password{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.password__icon{
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.login__img{
-    background-color: aquamarine;
-    width: 100%;
-    height: 100%;
-}
-
-.or {
-    position: relative;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 14px;
-}
-
-.or::before,
-.or::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background: var(--title-color);
-}
-
-.or::before {
-    top: 50%;
-    right: 100%;
-}
-.or::after {
-    top: 50%;
-    left: 100%;
-}
-
-.login__social{
-    row-gap: .5rem;
-}
-.login__social a{
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    column-gap: .5rem;
-}
-.login__social a i{
-    font-size: 1.5rem;
-}
-
-input{
-    outline: 0;
-    padding: .5rem .5rem;
-    border: 0;
-    border: 1px solid var(--title-color);
-}
-input{
-    border-radius: 6px;
+.login-title {
+    font-size: 50px;
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 20px;
 }
