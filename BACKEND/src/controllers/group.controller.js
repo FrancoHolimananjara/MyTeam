@@ -138,7 +138,7 @@ module.exports = {
         const group = await Group.findById(_id);
         if (group) {
           group.members.forEach(async (member, i) => {
-            if (member == req._userId) {
+            if (member == req._userId && _gi._id != member) {
               if (user.email === _gi.email) {
                 throw new Error("Same email, same user");
               }
@@ -150,12 +150,10 @@ module.exports = {
               if (group.creator != user._id) {
                 from = user.email;
               }
-
               const response = await sendInvitationEmail({ _group:_id,_id: _userId, _guest:_gi, subject })
-              // console.log(response);
-              // if (emailData.accepted) {
-              //   message = `The invitation to join your team '${group.name}' is sent`;
-              // }
+              if (response) {
+                res.status(200).json({success:true,message:`The invitation to join your team '${group.name}' is sent`})
+              }
             } else {
               return res
                   .status(404)
@@ -178,7 +176,7 @@ module.exports = {
     try {
       const group = await Accept(req.params);
       if (group) {
-        res.status(200).json({success:true,message:"You are 'desormais' member",group})
+        res.status(200).json({success:true,message:"You are 'desormais' member"})
       }
     } catch (error) {
       throw new Error(error);
@@ -192,6 +190,8 @@ async function sendInvitationEmail({ _group,_id, _guest, subject }) {
     const uniqueString = crypto.randomUUID() + _id;
     const currentUrl = "http://localhost:3001/";
     const user = await findUser(_id);
+
+    console.log("UniqueString => ",uniqueString);
 
     const { email } = _guest;
 
@@ -215,10 +215,10 @@ async function sendInvitationEmail({ _group,_id, _guest, subject }) {
     });
     // save the user Invitation record
     await newInvitation.save();
-    //await sendEmail(mailOptions);
+    await sendEmail(mailOptions);
     return {
       userId: _guest._id,
-      email:email.trim(),
+      email: email.trim()
     };
   } catch (error) {
     throw new Error(error);
@@ -238,8 +238,11 @@ async function Accept({_group,_id,_guestId,uniqueString}) {
           { $push: { members: _guestId } },
           { new: false, upsert:true}
         );
-        await UserInvitationEmail.findByIdAndDelete({
-          $and:[{userId:_id},{userGuestId:_guestId}]
+          await UserInvitationEmail.findOneAndDelete({
+          $and: [
+            { userId: _id },
+            { userGuestId: _guestId }
+          ]
         })
         return group;
       } else {
