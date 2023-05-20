@@ -136,13 +136,18 @@ module.exports = {
         var _gi = await findUser(_guestId);
 
         const group = await Group.findById(_id);
-        if (group) {
-          group.members.forEach(async (member, i) => {
-            if (member == req._userId && _gi._id != member) {
-              if (user.email === _gi.email) {
-                throw new Error("Same email, same user");
-              }
-              // Concatenation du Subject
+        if (group.members.length!=0) {
+          const invitor = group.members.find((value) => value.equals(req._userId));
+          console.log(invitor);
+          if (invitor) {
+            const guest = group.members.find((value)=> value.equals(_gi._id));
+            console.log(guest);
+            if (guest) {
+              return res
+                .status(400)
+                .json({ success: false, message: "The user you want to invite to join your group is already a member!" });
+            } else {
+              //Concatenation du Subject
               subject += `${group.name}'`;
               // Sender's emai
               var from;
@@ -152,18 +157,20 @@ module.exports = {
               }
               const response = await sendInvitationEmail({ _group:_id,_id: _userId, _guest:_gi, subject })
               if (response) {
-                res.status(200).json({success:true,message:`The invitation to join your team '${group.name}' is sent`})
+                return res
+                  .status(200)
+                  .json({ success: true, message: `The invitation to join your team '${group.name}' is sent!` });
               }
-            } else {
-              return res
-                  .status(404)
-                  .json({ success: false, message: "You are not yet a member" });
             }
-          })
+          } else {
+          return res
+              .status(400)
+              .json({ success: false, message: "You are not yet a member of this group!" });
+          }
         } else {
           return res
               .status(404)
-              .json({ success: false, message: "Group not found" });
+              .json({ success: false, message: "Group not found!" });
         }
       }
 
@@ -176,7 +183,9 @@ module.exports = {
     try {
       const group = await Accept(req.params);
       if (group) {
-        res.status(200).json({success:true,message:"You are 'desormais' member"})
+        return res
+          .status(200).
+          json({ success: true, message: "You are now part of this group!" })
       }
     } catch (error) {
       throw new Error(error);
