@@ -36,3 +36,14 @@ button {
     color: #1d2b3a;
     border-color: #1d2b3a;
 }
+
+.google{
+    color: #f40636;
+    background: #fff;
+    border: 1px solid #f40636;
+}
+
+.google:hover {
+    background-color: #f40636;
+    color: #fff;
+}

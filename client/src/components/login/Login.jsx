@@ -39,7 +39,7 @@ function Login() {
               <p className="or">OR</p>
             </div>
             <div className="other-methode">
-              <Button name="Google" type="secondary" icon="bx bxl-google" />
+              <Button name="Google" type="google" icon="bx bxl-google" />
               <Button name="Github" type="secondary" icon="bx bxl-github" />
             </div>
           </div>
