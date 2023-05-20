@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./login.css";
 import axios from "axios";
+import FloatingLabel from "../../ui-kit/floating-label/FloatingLabel";
+import Button from "../../ui-kit/button/Button";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,25 +27,25 @@ function Login() {
   return (
     <section className="login section">
       <div className="login-box">
-        <h1 className="login-title">My Team</h1>
+        <h1 className="login-title">
+          My <i>Team</i>
+        </h1>
         <form className="login-form">
-          <div className="identifier">
-            <label htmlFor="identifier">Identifier</label>
-            <input type="text" />
-          </div>
-          <div className="password">
-            <label htmlFor="password">Password</label>
-            <input type="password" />
-          </div>
-          <button className="login-signin">Sign In</button>
-          <p className="or">OR</p>
-          <div className="other-methode">
-            <button className="login-google">Google</button>
-            <button className="login-github">Github</button>
+          <FloatingLabel name="Identifier" type="text" />
+          <FloatingLabel name="Password" type="password" />
+          <div className="action-submit">
+            <Button name="Sign In" type="primary" />
+            <div className="choice">
+              <p className="or">OR</p>
+            </div>
+            <div className="other-methode">
+              <Button name="Google" type="secondary" icon="bx bxl-google" />
+              <Button name="Github" type="secondary" icon="bx bxl-github" />
+            </div>
           </div>
           <p className="create-account">
             Don't have account? click{" "}
-            <b>
+            <b className="here">
               <u>here</u>
             </b>{" "}
             to create one

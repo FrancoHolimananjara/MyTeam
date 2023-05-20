@@ -1,13 +1,82 @@
 .login-box {
     width: calc(100% / 4);
     height: fit-content;
-    margin: 50px auto;
-    border: solid black;
+    margin: 60px auto;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 .login-title {
     font-size: 50px;
     font-weight: bolder;
     text-align: center;
-    margin-top: 20px;
+    margin: 40px auto;
+    color: #1d2b3a;
+}
+
+.login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.action-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 15px;
+    gap: 5px;
+}
+
+.choice {
+    position: relative;
+}
+
+.or {
+    font-size: 10px;
+}
+
+.or::before{
+    position: absolute;
+    content: '';
+    width: 70px;
+    height: 1px;
+    background: #1d2b3a;
+    top: 6px;
+    right: 20px;
+    border-radius: 5px;
+}
+
+.or::after{
+    position: absolute;
+    content: '';
+    width: 70px;
+    height: 1px;
+    background: #1d2b3a;
+    top: 6px;
+    left: 20px;
+    border-radius: 5px;
+}
+
+.other-methode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.create-account {
+    font-size: 0.7rem;
+    margin-bottom: 20px;
+}
+
+.here {
+    cursor: pointer;
+}
+
+.here:hover {
+    color: #1d2b3a;
 }
