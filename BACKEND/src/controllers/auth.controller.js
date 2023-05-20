@@ -17,7 +17,9 @@ module.exports = {
     // Valid credentials
     const newUser = await createUser({ username, email, password });
     const emailData = await sendEmailVerification(newUser);
-    res.status(201).json({success:true,message:"Verification email sent !",data:emailData});
+    return res
+      .status(201)
+      .json({ success: true, message: "Verification email has been sent !", data: emailData });
   },
 
   verify_email: async (req, res) => {
@@ -27,7 +29,7 @@ module.exports = {
         res.sendFile(path.join(__dirname, "../../public/views/verified.html"));
       }
     } catch (error) {
-      throw new Error(error);
+      return res.status(500).json({ success: false, message: error });
     }
   },
 
@@ -49,7 +51,7 @@ module.exports = {
         });
       }
     } catch (error) {
-      throw new Error(error);
+      return res.status(500).json({ success: false, message: error });
     }
   },
 
@@ -74,7 +76,7 @@ module.exports = {
         }
       }
     } catch (error) {
-      throw new Error(error);
+      return res.status(500).json({ success: false, message: error });
     }
   },
 };
@@ -105,17 +107,64 @@ async function sendEmailVerification({ _id, email }) {
     const uniqueString = crypto.randomUUID() + _id;
     const currentUrl = "http://localhost:3001/";
 
+    //html
+    const html = `
+  <html>
+    <head>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f2f2f2;
+          padding: 20px;
+        }
+        .container {
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 5px;
+        }
+        .title {
+          font-size: 24px;
+          margin-bottom: 20px;
+        }
+        .paragraph {
+          margin-bottom: 10px;
+        }
+        .button {
+          display: inline-block;
+          background-color: white;
+          text-decoration: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          font-weight: bold;
+          border-radius: 5px;
+          border: 1px solid blue;
+          transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+        }
+        .button:hover {
+          background-color: white;
+          color: black;
+          border: 1px solid black;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <p class="paragraph">Before you can start, we kindly ask you to verify your email address by clicking on the following button:</p>
+        <a class="button" href="${currentUrl + "api/auth/verify/" + _id + "/" + uniqueString}">Verify Email</a>
+        <p class="paragraph">Once your email is verified, you will be ready to proceed with the registration process and you can login.</p>
+        <p>This link <b>expires in 30 minutes</b>.</p>
+        <p class="paragraph">Best regards,</p>
+      </div>
+    </body>
+  </html>
+`;
+
     // mail options
     const mailOptions = {
       from: process.env.AUTH_EMAIL,
       to: email,
       subject: "Verify Your Email",
-      html: `<p>Verify your email address to complete registration and login to your account.</p>
-                <p>This link <b>expires in 30 minutes</b>.</p>
-                <p>Press <a href=${
-                  currentUrl + "api/auth/verify/" + _id + "/" + uniqueString
-                }>here</a> to proceed.</p>
-            `,
+      html
     };
     // Verify hash
     const hashedUniqueString = await hashData(uniqueString);
@@ -143,7 +192,6 @@ async function VerifyAccount({ _id, uniqueString }) {
     });
     if (userVerificationEmailExist) {
       const match = await compareData(uniqueString, userVerificationEmailExist.uniqueString);
-      console.log(match);
       if (match) {
         const userVerified = await User.findByIdAndUpdate(
           { _id },

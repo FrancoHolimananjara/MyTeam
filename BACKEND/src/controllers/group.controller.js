@@ -17,21 +17,20 @@ module.exports = {
         return res
           .status(400)
           .json({ success: false, message: "Couldn't create new Group" });
-      } else {
-        // Add creator in membres
-        newGroup.members.push(newGroup.creator);
-        await newGroup.save();
-        await User.findByIdAndUpdate(
-          { _id: _creatorId },
-          { $push: { adminInGroup: newGroup._id } },
-          { new: false, upsert: true }
-        );
-        return res.status(201).json({
-          success: true,
-          message: `Group <b>${newGroup.name}</b> has been created!`,
-          data: newGroup,
-        });
       }
+      // Add creator in membres
+      newGroup.members.push(newGroup.creator);
+      await newGroup.save();
+      await User.findByIdAndUpdate(
+        { _id: _creatorId },
+        { $push: { adminInGroup: newGroup._id } },
+        { new: false, upsert: true }
+      );
+      return res.status(201).json({
+        success: true,
+        message: `Group <b>${newGroup.name}</b> has been created!`,
+        data: newGroup,
+      });
     } catch (error) {
       return res.status(500).json({ success: false, message: error });
     }
@@ -114,7 +113,7 @@ module.exports = {
               .json({ success: false, message: "Group not found" });
       }
     } catch (error) {
-      throw new Error(error);
+      return res.status(500).json({ success: false, message: error });
     }
   },
   /**
@@ -133,39 +132,37 @@ module.exports = {
 
       const _guestIdArray = req.params._guestId.split(',');
       for (const _guestId of _guestIdArray) {
-        var _gi = await findUser(_guestId);
+        var guest = await findUser(_guestId);
 
         const group = await Group.findById(_id);
         if (group.members.length!=0) {
           const invitor = group.members.find((value) => value.equals(req._userId));
-          console.log(invitor);
-          if (invitor) {
-            const guest = group.members.find((value)=> value.equals(_gi._id));
-            console.log(guest);
-            if (guest) {
-              return res
-                .status(400)
-                .json({ success: false, message: "The user you want to invite to join your group is already a member!" });
-            } else {
-              //Concatenation du Subject
-              subject += `${group.name}'`;
-              // Sender's emai
-              var from;
-              // Condition if the group's creator send the invitation to other person
-              if (group.creator != user._id) {
-                from = user.email;
-              }
-              const response = await sendInvitationEmail({ _group:_id,_id: _userId, _guest:_gi, subject })
-              if (response) {
-                return res
-                  .status(200)
-                  .json({ success: true, message: `The invitation to join your team '${group.name}' is sent!` });
-              }
-            }
-          } else {
-          return res
+          if (!invitor) {
+            return res
               .status(400)
               .json({ success: false, message: "You are not yet a member of this group!" });
+          }
+          const isGuestMember = group.members.find((value) => value.equals(guest._id));
+          if (isGuestMember) {
+            return res
+              .status(400)
+              .json({ success: false, message: "The user you want to invite to join your group is already a member!" });
+          }
+
+          //Concatenation du Subject
+          subject += `${group.name}'`;
+          // Sender's emai
+          let from;
+          // Condition if the group's creator send the invitation to other person
+          if (group.creator != user._id) {
+            from = user.email;
+          }
+
+          const response = await sendInvitationEmail({ _group: _id, _id: _userId, _guest: guest, subject });
+          if (response) {
+            return res
+              .status(200)
+              .json({ success: true, message: `The invitation to join your team '${group.name}' has been sent!` });
           }
         } else {
           return res
@@ -175,7 +172,7 @@ module.exports = {
       }
 
     } catch (error) {
-      throw new Error(error);
+      return res.status(500).json({ success: false, message: error });
     }
   },
 
@@ -188,7 +185,7 @@ module.exports = {
           json({ success: true, message: "You are now part of this group!" })
       }
     } catch (error) {
-      throw new Error(error);
+      return res.status(500).json({ success: false, message: error });
     }
   }
 };
@@ -204,15 +201,66 @@ async function sendInvitationEmail({ _group,_id, _guest, subject }) {
 
     const { email } = _guest;
 
+    //html
+    const html = `
+  <html>
+    <head>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f2f2f2;
+          padding: 20px;
+        }
+        .container {
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 5px;
+        }
+        .title {
+          font-size: 24px;
+          margin-bottom: 20px;
+        }
+        .paragraph {
+          margin-bottom: 10px;
+        }
+        .button {
+          display: inline-block;
+          background-color: white;
+          text-decoration: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          font-weight: bold;
+          border-radius: 5px;
+          border: 1px solid blue;
+          transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+        }
+        .button:hover {
+          background-color: white;
+          color: black;
+          border: 1px solid black;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1 class="title">${user.username} invites you to join their team</h1>
+        <p class="paragraph">Dear recipient,</p>
+        <p class="paragraph">We are pleased to invite you to join our team. We believe that your expertise and skills would be a valuable asset to our group.</p>
+        <p class="paragraph">We would be delighted to have you on board and work together to reach new heights.</p>
+        <p class="paragraph">Click the button below to accept our invitation:</p>
+        <a class="button" href="${currentUrl + "api/group/" + _group +"/"+ _id + "/invite/" + _guest._id + "/" + uniqueString}">Accept the invitation</a>
+        <p class="paragraph">Best regards,</p>
+      </div>
+    </body>
+  </html>
+`;
+
     // mail options
     const mailOptions = {
       from: process.env.AUTH_EMAIL,
       to: email.trim(),
       subject,
-      html: `
-              <h2>${user.username} invite you to join his team</h2>
-              <a href="${currentUrl + "api/group/" + _group +"/"+ _id + "/invite/" + _guest._id + "/" + uniqueString}">Accept his invitation</a>
-            `,
+      html
     };
     // Verify hash
     const hashedUniqueString = await hashData(uniqueString);
