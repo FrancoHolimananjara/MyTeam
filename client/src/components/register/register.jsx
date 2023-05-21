@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import "../register/register.css";
 import FloatingLabel from "../../ui-kit/floating-label/FloatingLabel";
 import Button from "../../ui-kit/button/Button";

@@ -3,7 +3,7 @@ import "../button/button.css";
 
 function Button({name,type,icon}) {
     return (
-        <button type='button' className={type} ><i class={icon}></i> {name}</button>
+        <button type='submit' className={type} ><i class={icon}></i> {name}</button>
     );
 }
 
