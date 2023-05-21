@@ -26,7 +26,7 @@ function Register() {
               <p className="or">OR</p>
             </div>
             <div className="other-methode">
-              <Button name="Google" type="google" icon="bx bxl-google" />
+              <Button name="Google" type="google2" icon="bx bxl-google" />
               <Button name="Github" type="primary" icon="bx bxl-github" />
             </div>
           </div>

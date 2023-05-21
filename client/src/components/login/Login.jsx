@@ -5,23 +5,21 @@ import FloatingLabel from "../../ui-kit/floating-label/FloatingLabel";
 import Button from "../../ui-kit/button/Button";
 
 function Login() {
-  const [showPassword, setShowPassword] = useState(false);
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
 
-  const [token, setToken] = useState("");
+  const handleSubmitSignIn = (e) => {
+    e.preventDefault();
 
-  const onSubmit = async () => {
-    const data = {
-      identifier,
-      password,
-    };
-    const response = await axios.post(
-      "http://localhost:3001/api/auth/login",
-      data
-    );
-    setToken(response.data["token"]);
-    localStorage.setItem("auth", response.data["token"]);
+    axios
+      .post("http://localhost:3001/api/auth/login", { identifier, password })
+      .then((response) => {
+        const { data } = response;
+        console.log("TOKEN => ", data.token);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -31,10 +29,22 @@ function Login() {
           My <i>Team</i>
         </h1>
         <form className="login-form">
-          <FloatingLabel name="Identifier" type="text" />
-          <FloatingLabel name="Password" type="password" />
+          <FloatingLabel
+            name="Identifier"
+            type="text"
+            setState={setIdentifier}
+          />
+          <FloatingLabel
+            name="Password"
+            type="password"
+            setState={setPassword}
+          />
           <div className="action-submit">
-            <Button name="Sign In" type="primary" />
+            <Button
+              name="Sign In"
+              type="primary"
+              handleSubmit={handleSubmitSignIn}
+            />
             <div className="choice">
               <p className="or">OR</p>
             </div>

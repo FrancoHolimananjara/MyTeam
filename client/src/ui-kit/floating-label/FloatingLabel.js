@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "../floating-label/floatingLabel.css";
 
-function FloatingLabel({name,type}) {
-  const [inputValue, setInputValue] = useState('');
+function FloatingLabel({name,type,setState}) {
 
   const handleInputChange = (e) => {
-    setInputValue(e.target.value);
+    setState(e.target.value);
   };
 
   return (
     <div class="inputBox">
-        <input type={type} required="required"/>
+        <input type={type} required="required" onChange={handleInputChange}/>
         <span>{name}</span>
     </div>
   );

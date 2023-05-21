@@ -69,7 +69,9 @@ module.exports = {
       } else {
         const match = bcrypt.compareSync(password, user.password);
         if (!match) {
-          throw new Error("Invalid password!");
+          return res
+            .status(403)
+            .json({ success: false, message: "Invalid credentials!" });
         } else {
           const token = createToken(user);
           return res.status(200).json({ token });
