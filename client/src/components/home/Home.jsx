@@ -15,7 +15,7 @@ function Home() {
         </h1>
         <p class="designed">Designed by Franco</p>
         <p>
-          MyTeam is a platform designed for people who 
+          MyTeam is a platform designed for people who
           {" "}
           <i>
             <b>Work</b>
@@ -30,7 +30,7 @@ function Home() {
         <div className="other-class">
           <Button
             otherclass="other-class"
-            name="Start now"
+            value="Start now"
             type="secondary"
             handleSubmit={()=>{
               navigate('/login')

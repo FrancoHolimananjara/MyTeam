@@ -1,17 +1,15 @@
 button {
-    padding: 12px 35px;
+    padding: 15px;
     border-radius: 12px;
-    transition: 0.5s;
     cursor: pointer;
     letter-spacing: 0.1em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+    transition: color .5s, background-color .5s;
+    outline: none;
+    font-weight: 600;
 }
 
-.icon {
-    font-size: 2rem;
+i {
+    /* font-size: 1.5rem; */
 }
 
 .primary {
@@ -40,17 +38,18 @@ button {
 .google{
     color: #fff;
     background: #f40636;
+    border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .google:hover {
     background-color: #fff;
     color: #f40636;
-    border: 1px solid #f40636;
+    border-color:#f40636;
 }
 .google2{
     color: #f40636;
     background: #fff;
-    border: 1px solid #f40636;
+    border-color:#f40636;
 }
 
 .google2:hover {

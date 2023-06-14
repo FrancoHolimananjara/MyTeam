@@ -41,7 +41,7 @@ function Login() {
           />
           <div className="action-submit">
             <Button
-              name="Sign In"
+              value="Sign In"
               type="primary"
               handleSubmit={handleSubmitSignIn}
             />
@@ -49,8 +49,8 @@ function Login() {
               <p className="or">OR</p>
             </div>
             <div className="other-methode">
-              <Button name="Google" type="google" icon="bx bxl-google" />
-              <Button name="Github" type="secondary" icon="bx bxl-github" />
+              <Button value="Google" type="google" icon="bx bxl-google" />
+              <Button value="Github" type="secondary" icon="bx bxl-github" />
             </div>
           </div>
           <p className="create-account">

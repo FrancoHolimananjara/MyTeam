@@ -1,55 +1,48 @@
-import React, { useState } from "react";
+import React from "react";
 import "./header.css";
+import { Link } from 'react-router-dom';
+
+
+const links = [
+  {
+    id: 0,
+    name: 'Home',
+    url:'/'
+  },
+  {
+    id: 1,
+    name: 'Services',
+    url:'/services'
+  },
+  {
+    id: 2,
+    name: 'About',
+    url:'/about'
+  },
+  {
+    id: 3,
+    name: 'Contact',
+    url:'/contact'
+  },
+]
 
 function Header() {
   // STATE (état, données)
-
-  /* TOGGLE MENU */
-  const [toggle, setToggle] = useState(false);
-
   // BEHAVIOR (comportements)
   // RENDER (affichage)
   return (
-    <header className="header">
-      <nav className="nav container">
-        <a href="/" className="nav__logo">
-          My <i>team</i>
-        </a>
-        <div className={toggle ? "nav__menu show-menu" : "nav__menu"}>
-          <ul className="nav__list grid">
-            <li className="nav__item">
-              <a href="/" className="nav__link active-link">
-                <i className="bx bx-home nav__icon"></i> Home
-              </a>
+    <div className="container">
+      <nav className="header">
+        <Link to="/" className="logo">My team</Link>
+        <ul className="links">
+          {links.map(link => {
+            return <li className="link" key={link.id}>
+              <Link to={link.url} className="link-item">{link.name}</Link>
             </li>
-            <li className="nav__item">
-              <a href="#services" className="nav__link">
-                <i className="bx bx-briefcase-alt nav__icon"></i> Services
-              </a>
-            </li>
-            <li className="nav__item">
-              <a href="#about" className="nav__link">
-                <i className="bx bx-info-circle nav__icon"></i> About
-              </a>
-            </li>
-            <li className="nav__item">
-              <a href="#contact" className="nav__link">
-                <i className="bx bx-send nav__icon"></i> Contact
-              </a>
-            </li>
-          </ul>
-
-          <i
-            className="bx bx-x nav__close"
-            onClick={() => setToggle(!toggle)}
-          ></i>
-        </div>
-
-        <div className="nav__toggle" onClick={() => setToggle(!toggle)}>
-          <i class="bx bxs-dashboard"></i>
-        </div>
+          })}
+        </ul>
       </nav>
-    </header>
+    </div>
   );
 }
 
