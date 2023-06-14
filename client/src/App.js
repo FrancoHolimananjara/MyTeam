@@ -4,7 +4,6 @@ import Header from './components/header/Header';
 import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Register from './components/register/register';
-import FloatingLabel from './ui-kit/floating-label/FloatingLabel';
 
 function App() {
 

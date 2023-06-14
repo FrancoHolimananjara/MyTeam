@@ -1,0 +1,25 @@
+<svg id="MyTeamLogo2" xmlns="http://www.w3.org/2000/svg" width="108" height="28" viewBox="0 0 108 28">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #1d2b3a;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-size: 20px;
+        font-family: Poppins-ExtraBold, Poppins;
+        font-weight: 800;
+      }
+
+      .cls-3 {
+        font-family: Poppins-ExtraBoldItalic, Poppins;
+        font-style: italic;
+      }
+    </style>
+  </defs>
+  <rect id="Rectangle_5" data-name="Rectangle 5" class="cls-1" width="108" height="26" rx="5" transform="translate(0 1)"/>
+  <g id="Logo" transform="translate(7)">
+    <text id="MY_TEAM" data-name="MY TEAM" class="cls-2"><tspan x="0.31" y="21">MY </tspan><tspan class="cls-3" y="21">TEAM</tspan></text>
+  </g>
+</svg>
