@@ -5,10 +5,13 @@ import FloatingLabel from "../../ui-kit/floating-label/FloatingLabel";
 import Button from "../../ui-kit/button/Button";
 import { NavLink, useNavigate } from "react-router-dom";
 import Divider from "../../ui-kit/divider/Divider";
+import Toast from "../../ui-kit/toast/Toast";
 
 function Login() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
+
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -25,11 +28,14 @@ function Login() {
       })
       .catch((error) => {
         console.log(error);
+        let { message } = error.response.data
+        setError(message)
       });
   };
 
   return (
     <div className="container">
+      {error ? <Toast type="error" message={error} /> : ''}
       <div className="login-box">
         <h1 className="login-title">Login</h1>
         <form className="login-form">

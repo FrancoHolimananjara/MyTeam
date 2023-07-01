@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './toast.css'
 const Toast = ({ type, message }) => {
     const [style, setStyle] = useState({ background: "", borderBottom: "" });
+    const [isShow, setIsShow] = useState(false);
     const diffTypes = () => {
         switch (type) {
             case 'success':
@@ -29,9 +30,13 @@ const Toast = ({ type, message }) => {
     }
     useEffect(() => {
         diffTypes();
+        setIsShow(true)
     }, []);
+    setInterval(() => {
+        setIsShow(false)
+    }, 4000);
     return (
-        <p className='toast' style={style}>{message}</p>
+        <p className={isShow ? 'toast open' : 'toast '} style={style}>{message}</p>
     );
 }
 

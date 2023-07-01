@@ -64,6 +64,7 @@ function Header() {
           setIsOpen(!isOpen)
         }}>
           <i class={isOpen ? 'bx bx-menu-alt-left' : 'bx bx-menu-alt-right'} ></i>
+          <span>{isOpen ? 'x' : 'o'}</span>
         </div>
       </nav>
     </div>
