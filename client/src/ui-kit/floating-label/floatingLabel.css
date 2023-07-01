@@ -1,42 +1,79 @@
 .inputBox {
-    position: relative;
-    width: 300px;
+  position: relative;
+  width: 350px;
+  margin: 10px auto;
+  z-index: 1;
 }
 
 .inputBox input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #1d2b3a6c;
-    background: #fff;
-    border-radius: 5px;
-    outline: none;
-    color: #1d2b3a;
-    font-size: 1em;
-    transition: 0.5s;
+  width: 90%;
+  padding: 15px 10px;
+  border: 1px solid rgb(255, 255, 255);
+  background: #0c0f1b;
+  border-radius: 5px;
+  outline: none;
+  color: #fff;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: 0.5s;
 }
 
 .inputBox span {
-    position: absolute;
-    left: 0;
-    padding: 10px;
-    pointer-events: none;
-    font-size: 1em;
-    transition: 0.5s;
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 0.9rem;
+  color: rgb(230, 230, 230);
+  transition: 0.5s;
 }
 
-.inputBox input:valid~span,
-.inputBox input:focus~span {
-    color: #1d2b3a;
-    transform: translateX(10px) translateY(-7px);
-    font-size: 0.7em;
-    padding: 0 10px;
-    background: #fff;
-    border-left: 1px solid #1d2b3a;
-    border-right: 1px solid #1d2b3a;
-    letter-spacing: 0.1em;
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span {
+  color: #fff;
+  transform: translateX(10px) translateY(-7px);
+  font-size: 0.65rem;
+  padding: 0 10px;
+  background: #0c0f1b;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  letter-spacing: 1px;
 }
+/* 
+.inputBox:nth-child(2) input:valid~span,
+.inputBox:nth-child(2) input:focus~span {
+    color: #1d2b3a;
+    background: #fff;
+    border-radius: 2px;
+} */
 
 .inputBox input:valid,
 .inputBox input:focus {
-    border: 1px solid #1d2b3a;
+  border: 1px solid #fff;
+}
+
+/* TABLET */
+@media screen and (max-width: 768px) {
+  .inputBox {
+    width: 320px;
+  }
+}
+/* MOBILE */
+@media screen and (max-width: 600px) {
+  .inputBox {
+    width: 350px;
+  }
+}
+/* MOBILE */
+@media screen and (max-width: 376px) {
+  .inputBox {
+    width: 330px;
+  }
+}
+/* MOBILE */
+@media screen and (max-width: 350px) {
+  .inputBox {
+    width: 280px;
+  }
 }

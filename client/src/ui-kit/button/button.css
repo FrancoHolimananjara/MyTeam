@@ -10,23 +10,28 @@ button {
 
 i {
     /* font-size: 1.5rem; */
+    transition: color 2s;
 }
 
 .primary {
-    color: #1d2b3a;
-    border: 1px solid #1d2b3a;
+    color: #fff;
+    border: 1px solid #fff;
     background: transparent;
 }
 
 .primary:hover {
-    background-color: #1d2b3a;
-    color: #fff;
+    background-color: #ffffff;
+    border: 1px solid #0c0f1b;
+    color: #0c0f1b;
+}
+.primary:hover i {
+    color: #0c0f1b;
 }
 
 .secondary {
     color: #fff;
     background: #1d2b3a;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgb(255, 255, 255);
 }
 
 .secondary:hover {
@@ -35,16 +40,22 @@ i {
     border-color: #1d2b3a;
 }
 
+.secondary:hover i {
+    color: #0c0f1b;
+}
+
 .google{
     color: #fff;
     background: #f40636;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgb(255, 255, 255);
 }
 
 .google:hover {
     background-color: #fff;
     color: #f40636;
-    border-color:#f40636;
+}
+.google:hover i {
+    color: #f40636;
 }
 .google2{
     color: #f40636;

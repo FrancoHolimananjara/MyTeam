@@ -1,9 +1,29 @@
 .container {
     padding: 0 250px;
 }
-a {
-    text-decoration: none;
+
+/* COMPUTER */
+@media screen and (max-width:1200px) {
+    
 }
-ul {
-    list-style-type: none;
+
+/* LAPTOP */
+@media screen and (max-width:1024px) {
+    .container {
+        padding: 0 150px;
+    }
+}
+
+/* TABLET */
+@media screen and (max-width:768px) {
+    .container {
+        padding: 0 50px;
+    }
+}
+
+/* MOBILE */
+@media screen and (max-width:600px) {
+    .container {
+        padding: 0 10px;
+    }
 }

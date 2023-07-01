@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import "../register/register.css";
+import "./register.css";
 import FloatingLabel from "../../ui-kit/floating-label/FloatingLabel";
 import Button from "../../ui-kit/button/Button";
 import axios from "axios";
+
+import { Link } from "react-router-dom";
+import Divider from "../../ui-kit/divider/Divider";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -35,50 +38,39 @@ function Register() {
     return cp === p ? true : false;
   };
   return (
-    <section className="register section">
+    <div className="container">
       <div className="register-box">
         <h1 className="register-title">
-          My <i>Team</i>
+          Register
         </h1>
         <form className="register-form">
           <FloatingLabel name="Username" type="text" setState={setUsername} />
           <FloatingLabel name="Email" type="email" setState={setEmail} />
-          <div className="password-action">
-            <FloatingLabel
-              name="Password"
-              type="password"
-              setState={setPassword}
-            />
-            <FloatingLabel
-              name="Confirm"
-              type="password"
-              setState={setConfirm}
-            />
-          </div>
+          <FloatingLabel
+            name="Password"
+            type="password"
+            setState={setPassword}
+          />
+          <FloatingLabel name="Confirm" type="password" setState={setConfirm} />
           <div className="action-submit">
             <Button
-              name="Register"
-              type="secondary"
+              value="Register"
+              type="primary"
               handleSubmit={handleSubmit}
             />
-            <div className="choice">
-              <p className="or">OR</p>
-            </div>
+            <Divider />
             <div className="other-methode">
-              <Button name="Google" type="google2" icon="bx bxl-google" />
-              <Button name="Github" type="primary" icon="bx bxl-github" />
+              <Button type="google" icon="bx bxl-google" value="Google" />
+              <Button type="primary" icon="bx bxl-github" value="Github" />
             </div>
           </div>
           <p className="here-to-login">
-            You have already account? click{" "}
-            <b className="here">
-              <u>here</u>
-            </b>{" "}
-            to login
+            Do you have an account? click {" "} <Link to={"/login"}><u>here</u></Link> {" "}to
+            login
           </p>
         </form>
       </div>
-    </section>
+    </div>
   );
 }
 export default Register;

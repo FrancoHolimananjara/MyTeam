@@ -1,0 +1,33 @@
+.loading {
+    z-index: 1000000;
+    width: 45px;
+    height: 45px;
+    margin: 300px auto;
+}
+.box {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    background: #9b9b9b;
+    display: inline-block;
+    animation: pulse 0.6s ease-in infinite alternate;
+}
+.box2,.box4 {
+    margin-left: 5px;
+}
+.box2,.box3 {
+    animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+    100% {
+        opacity: 0;
+    }
+}
+
+/* MOBILE */
+@media screen and (max-width:600px) {
+    .loading {
+        margin: 250px auto;
+    }
+}

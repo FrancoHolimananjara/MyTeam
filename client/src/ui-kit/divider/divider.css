@@ -1,0 +1,24 @@
+.divider .or {
+    position: relative;
+    font-size: 0.6rem;
+}
+
+.divider .or::before {
+    position: absolute;
+    content: "";
+    width: 37%;
+    height: 1px;
+    top: 6px;
+    left: 7%;
+    background: white;
+}
+
+.divider .or::after {
+    position: absolute;
+    content: "";
+    width: 37%;
+    height: 1px;
+    top: 6px;
+    right: 7%;
+    background: white;
+}

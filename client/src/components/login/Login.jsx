@@ -3,10 +3,14 @@ import "./login.css";
 import axios from "axios";
 import FloatingLabel from "../../ui-kit/floating-label/FloatingLabel";
 import Button from "../../ui-kit/button/Button";
+import { NavLink, useNavigate } from "react-router-dom";
+import Divider from "../../ui-kit/divider/Divider";
 
 function Login() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmitSignIn = (e) => {
     e.preventDefault();
@@ -14,8 +18,10 @@ function Login() {
     axios
       .post("http://localhost:3001/api/auth/login", { identifier, password })
       .then((response) => {
-        const { data } = response;
-        console.log("TOKEN => ", data.token);
+        const { token } = response.data;
+        console.log("USER CONNECTED!");
+        localStorage.setItem("access-token", token);
+        navigate('/dashboard')
       })
       .catch((error) => {
         console.log(error);
@@ -23,11 +29,9 @@ function Login() {
   };
 
   return (
-    <section className="login section">
+    <div className="container">
       <div className="login-box">
-        <h1 className="login-title">
-          My <i>Team</i>
-        </h1>
+        <h1 className="login-title">Login</h1>
         <form className="login-form">
           <FloatingLabel
             name="Identifier"
@@ -42,12 +46,10 @@ function Login() {
           <div className="action-submit">
             <Button
               value="Sign In"
-              type="primary"
+              type="secondary"
               handleSubmit={handleSubmitSignIn}
             />
-            <div className="choice">
-              <p className="or">OR</p>
-            </div>
+            <Divider />
             <div className="other-methode">
               <Button value="Google" type="google" icon="bx bxl-google" />
               <Button value="Github" type="secondary" icon="bx bxl-github" />
@@ -55,14 +57,14 @@ function Login() {
           </div>
           <p className="create-account">
             Don't have account? click{" "}
-            <b className="here">
+            <NavLink to={"/register"}>
               <u>here</u>
-            </b>{" "}
+            </NavLink>{" "}
             to create one
           </p>
         </form>
       </div>
-    </section>
+    </div>
   );
 }
 

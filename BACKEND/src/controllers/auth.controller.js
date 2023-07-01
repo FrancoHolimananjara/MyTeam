@@ -107,6 +107,7 @@ async function createUser(userData) {
 async function sendEmailVerification({ _id, email }) {
   try {
     const uniqueString = crypto.randomUUID() + _id;
+    console.log(uniqueString);
     const currentUrl = "http://localhost:3001/";
 
     //html
